@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/chooseFuncFragment">
+
+    <fragment
+        android:id="@+id/calcExchangeRateFragment"
+        android:name="com.example.exchangeratecalculator.CalcExchangeRateFragment"
+        android:label="CalcExchangeRateFragment" >
+        <action
+            android:id="@+id/action_calcExchangeRateFragment_to_chooseFuncFragment"
+            app:destination="@id/chooseFuncFragment" />
+        <argument
+            android:name="item_id1"
+            app:argType="integer" />
+        <argument
+            android:name="item_id2"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/exchangeRateListFragment"
+        android:name="com.example.exchangeratecalculator.ExchangeRateListFragment"
+        android:label="ExchangeRateListFragment" >
+        <action
+            android:id="@+id/action_exchangeRateListFragment_to_chooseFuncFragment"
+            app:destination="@id/chooseFuncFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseFuncFragment"
+        android:name="com.example.exchangeratecalculator.ChooseFuncFragment"
+        android:label="fragment_choose_func"
+        tools:layout="@layout/fragment_choose_func" >
+        <action
+            android:id="@+id/action_chooseFuncFragment_to_exchangeRateListFragment"
+            app:destination="@id/exchangeRateListFragment" />
+        <action
+            android:id="@+id/action_chooseFuncFragment_to_calcExchangeRateFragment"
+            app:destination="@id/calcExchangeRateFragment" />
+    </fragment>
+</navigation>
