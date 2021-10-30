@@ -8,7 +8,7 @@ import com.example.exchangeratecalculator.network.ExchangeRateApi
 import kotlinx.coroutines.launch
 
 
-class ExchangeRateCalculatorViewModel(private val exchangeRateDao: ExchangeRateDao) : ViewModel() {
+class ExchRateCalcViewModel(private val exchangeRateDao: ExchangeRateDao) : ViewModel() {
 
     private val _exchangeRate = MutableLiveData<List<ExchangeRate>>()
     val exchangeRate: LiveData<List<ExchangeRate>> = _exchangeRate
@@ -21,7 +21,6 @@ class ExchangeRateCalculatorViewModel(private val exchangeRateDao: ExchangeRateD
 
 
     private fun getExchangeRate() {
-
         Log.d("<main activity>", "get exchange rate")
         viewModelScope.launch {
             try {
@@ -33,14 +32,19 @@ class ExchangeRateCalculatorViewModel(private val exchangeRateDao: ExchangeRateD
             }
         }
     }
-}//ExchangeRateCalculatorViewModel
 
-class ExchangeRateCalculatorViewModelFactory(private val exchangeRateDao: ExchangeRateDao) :
+
+
+
+
+}//ExchRateCalcViewModel
+
+class ExchRateCalcViewModelFactory(private val exchangeRateDao: ExchangeRateDao) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ExchangeRateCalculatorViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(ExchRateCalcViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return ExchangeRateCalculatorViewModel(exchangeRateDao) as T
+            return ExchRateCalcViewModel(exchangeRateDao) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

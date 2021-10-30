@@ -14,10 +14,11 @@
         android:layout_height="50dp"
         android:layout_marginStart="50dp"
         android:gravity="center_vertical"
-        android:textAppearance="?attr/textAppearanceBody1"
+        android:textAppearance="?attr/textAppearanceBody2"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toStartOf="@id/item_value"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/item_value"
         tools:text="미국달러" />
 
     <TextView

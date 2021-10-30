@@ -1,11 +1,11 @@
 package com.example.exchangeratecalculator
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.example.exchangeratecalculator.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
