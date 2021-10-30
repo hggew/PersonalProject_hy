@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ExchangeRateCalculator</string>
+    <string name="choose_function">Choose Function</string>
+    <string name="calc_exch_rate">Calculate Exchange Rate</string>
+    <string name="exch_rate_list">Exchange Rate List</string>
+    <string name="business_date">Business Date</string>
+    <string name="unit">Unit</string>
+    <string name="value">Value</string>
+    <string name="calculator">Calculator</string>
+    <string name="exchange_rate">Exchange Rate</string>
+
+
+
 </resources>

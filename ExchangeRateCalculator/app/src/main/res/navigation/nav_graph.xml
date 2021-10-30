@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/calcExchangeRateFragment"
         android:name="com.example.exchangeratecalculator.CalcExchRateFragment"
-        android:label="CalcExchangeRateFragment" >
+        android:label="@string/calc_exch_rate">
         <action
             android:id="@+id/action_calcExchangeRateFragment_to_chooseFuncFragment"
             app:destination="@id/chooseFuncFragment" />
@@ -22,20 +22,20 @@
     <fragment
         android:id="@+id/chooseFuncFragment"
         android:name="com.example.exchangeratecalculator.ChooseFuncFragment"
-        android:label="fragment_choose_func"
-        tools:layout="@layout/fragment_choose_func" >
+        android:label="@string/choose_function"
+        tools:layout="@layout/fragment_choose_func">
         <action
             android:id="@+id/action_chooseFuncFragment_to_calcExchangeRateFragment"
             app:destination="@id/calcExchangeRateFragment" />
         <action
-            android:id="@+id/action_chooseFuncFragment_to_exchRateListFragment2"
+            android:id="@+id/action_chooseFuncFragment_to_exchRateListFragment"
             app:destination="@id/exchRateListFragment2" />
     </fragment>
     <fragment
         android:id="@+id/exchRateListFragment2"
         android:name="com.example.exchangeratecalculator.ExchRateListFragment"
-        android:label="fragment_exch_rate_list"
-        tools:layout="@layout/fragment_exch_rate_list" >
+        android:label="@string/exch_rate_list"
+        tools:layout="@layout/fragment_exch_rate_list">
         <action
             android:id="@+id/action_exchRateListFragment2_to_chooseFuncFragment"
             app:destination="@id/chooseFuncFragment" />

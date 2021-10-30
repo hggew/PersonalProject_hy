@@ -8,12 +8,11 @@
     android:layout_margin="16dp" >
 
 
-
     <TextView
         android:id="@+id/item_biz_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Business Date"
+        android:text="@string/business_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />

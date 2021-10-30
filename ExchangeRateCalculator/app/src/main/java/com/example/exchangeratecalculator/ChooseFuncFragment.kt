@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.exchangeratecalculator.databinding.FragmentChooseFuncBinding
 import com.example.exchangeratecalculator.viewmodels.ExchRateCalcViewModel
 import com.example.exchangeratecalculator.viewmodels.ExchRateCalcViewModelFactory
+
 
 class ChooseFuncFragment : Fragment() {
 
@@ -40,11 +42,12 @@ class ChooseFuncFragment : Fragment() {
 
     }//onViewCreated
 
-    fun goExchRateFragment(){
+    fun goCalcFragment(){
+        findNavController().navigate(R.id.action_chooseFuncFragment_to_calcExchangeRateFragment)
 
     }
-    fun goCalcFragment(){
-
+    fun goExchRateFragment(){
+        findNavController().navigate(R.id.action_chooseFuncFragment_to_exchRateListFragment)
     }
 }
 

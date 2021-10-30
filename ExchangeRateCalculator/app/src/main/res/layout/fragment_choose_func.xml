@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--<androidx.constraintlayout.widget.ConstraintLayout-->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="16dp"
     tools:context=".ChooseFuncFragment">
 
     <data>
@@ -16,28 +12,36 @@
             type="com.example.exchangeratecalculator.ChooseFuncFragment" />
     </data>
 
-    <Button
-        android:id="@+id/btnCalculator"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="30dp"
-        android:onClick="@{() -> chooseFuncFragment.goCalcFragment()}"
-        android:text="Calculator"
-        app:layout_constraintBottom_toTopOf="@+id/btnExchangeRate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/btnExchangeRate"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:text="Exchange Rate"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCalculator"
-        tools:layout_editor_absoluteX="89dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical">
 
-</layout><!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+
+        <Button
+            android:id="@+id/btnCalculator"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:background="@color/purple_200"
+            android:gravity="center"
+            android:onClick="@{() -> chooseFuncFragment.goCalcFragment()}"
+            android:text="@string/calculator"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/btnExchangeRate"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/purple_200"
+            android:gravity="center"
+            android:onClick="@{() -> chooseFuncFragment.goExchRateFragment()}"
+            android:text="@string/exchange_rate"
+            android:textAlignment="center"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+</layout>
