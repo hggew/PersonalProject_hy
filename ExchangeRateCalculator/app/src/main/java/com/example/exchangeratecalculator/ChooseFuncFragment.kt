@@ -11,12 +11,15 @@ import com.example.exchangeratecalculator.databinding.FragmentChooseFuncBinding
 import com.example.exchangeratecalculator.viewmodels.ExchRateCalcViewModel
 import com.example.exchangeratecalculator.viewmodels.ExchRateCalcViewModelFactory
 
+//import com.example.exchangeratecalculator.viewmodels.ExchRateCalcViewModelFactory
+
 
 class ChooseFuncFragment : Fragment() {
 
     private var _binding: FragmentChooseFuncBinding? = null
-    private val binding
-        get() = _binding!!
+    private val binding get() = _binding!!
+
+//    private val viewModel: ExchRateCalcViewModel by activityViewModels()
 
     private val viewModel: ExchRateCalcViewModel by activityViewModels {
         ExchRateCalcViewModelFactory(
@@ -32,6 +35,7 @@ class ChooseFuncFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentChooseFuncBinding.inflate(inflater, container, false)
+//        binding.lifecycleOwner = this
         return binding.root
     }//onCreateView
 

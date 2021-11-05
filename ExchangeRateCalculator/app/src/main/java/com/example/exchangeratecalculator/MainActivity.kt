@@ -6,7 +6,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.exchangeratecalculator.databinding.ActivityMainBinding
+import com.example.exchangeratecalculator.network.ExchangeRate
+import com.example.exchangeratecalculator.network.ExchangeRateApiService
+import com.example.exchangeratecalculator.network.FULL_URL
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,11 +19,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.d("<main activity>","start main activity")
+        Log.d("<khy-main>","start main activity")
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         setupActionBarWithNavController(navController)
+
+
+
 
     }
 

@@ -6,6 +6,8 @@ import com.example.exchangeratecalculator.database.ExchangeRateDao
 import com.example.exchangeratecalculator.network.ExchangeRate
 import com.example.exchangeratecalculator.network.ExchangeRateApi
 import kotlinx.coroutines.launch
+import java.lang.Exception
+
 
 
 class ExchRateCalcViewModel(private val exchangeRateDao: ExchangeRateDao) : ViewModel() {
@@ -15,20 +17,21 @@ class ExchRateCalcViewModel(private val exchangeRateDao: ExchangeRateDao) : View
 
 
     init {
-        Log.d("<main activity>", "start view model")
+        Log.d("<khy-viewmodel>", "start view model")
         getExchangeRate()
     }
 
 
     private fun getExchangeRate() {
-        Log.d("<main activity>", "get exchange rate")
+        Log.d("<khy-viewmodel>", "get exchange rate")
         viewModelScope.launch {
             try {
                 _exchangeRate.value = ExchangeRateApi.retrofitService.getExchangeRate()
-                Log.d("<main activity>", "success launch")
+                Log.d("<khy-viewmodel>", "success launch")
 //                Log.d("<main activity>", "${_exchangeRate.value!![0].unit}")
             } catch (e: Exception) {
-                Log.d("<main activity>", "fail launch")
+                Log.d("<khy-viemodel>", "fail launch")
+                _exchangeRate.value = listOf()
             }
         }
     }

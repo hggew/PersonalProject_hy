@@ -1,6 +1,7 @@
 package com.example.exchangeratecalculator.network
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -14,7 +15,7 @@ import java.time.LocalDate.now
 private const val BASE_URL =
     "https://ecos.bok.or.kr/api/StatisticSearch/2WACC588KULFVHKC0IED/json/kr/1/100/036Y001/DD/"
 
-lateinit var FULL_URL: String
+var FULL_URL = BASE_URL
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -42,10 +43,12 @@ object ExchangeRateApi{
 
 @RequiresApi(Build.VERSION_CODES.O)
 private fun setFullUrl():String{
-    val recentBizDate: LocalDate = now()
+//    val recentBizDate: LocalDate = now()
 
-    FULL_URL = BASE_URL+recentBizDate+"/"+recentBizDate
+    val recentBizDate = "20211029"
+    FULL_URL += recentBizDate+"/"+recentBizDate
 
+    Log.d("<khy- apiservice>", "full url : ${FULL_URL}")
     return FULL_URL
 
 }
