@@ -1,6 +1,7 @@
 package com.example.exchangerate
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +11,8 @@ import com.example.exchangerate.databinding.FragmentChooseFuncBinding
 
 class ChooseFuncFragment : Fragment() {
 
-//    private val viewModel: ExchRateViewModel by viewModels()
 
     private var binding : FragmentChooseFuncBinding? = null
-
 
     override fun onCreateView(
         inflater: LayoutInflater,

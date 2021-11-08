@@ -8,7 +8,8 @@
     <string name="value">Value</string>
     <string name="calculator">Calculator</string>
     <string name="exchange_rate">Exchange Rate</string>
-
+    <string name="calculate">calculate</string>
+    <string name="input_hint">금액을 입력하세요</string>
 
 
 </resources>

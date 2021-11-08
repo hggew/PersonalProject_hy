@@ -26,14 +26,26 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/biz_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.dateUrl}"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toEndOf="@id/item_biz_date"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="20211029" />
+
+        <TextView
             android:id="@+id/item_unit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
             android:text="@string/unit"
             app:layout_constraintEnd_toStartOf="@+id/item_Value"
             app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintHorizontal_weight="3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_biz_date"  />
 
@@ -65,14 +77,14 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:paddingBottom="?attr/actionBarSize"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:scrollbars="vertical"
-            app:listData="@{viewModel.exchRate}"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider"
-            tools:listitem="@layout/exch_rate_list_item"   />
+            app:listData="@{viewModel.exchRate}"
+            tools:listitem="@layout/exch_rate_list_item" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
