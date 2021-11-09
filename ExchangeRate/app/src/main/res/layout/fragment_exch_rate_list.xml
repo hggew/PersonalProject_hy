@@ -45,7 +45,7 @@
             android:text="@string/unit"
             app:layout_constraintEnd_toStartOf="@+id/item_Value"
             app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintHorizontal_weight="5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_biz_date"  />
 
@@ -57,7 +57,7 @@
             android:text="@string/value"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintHorizontal_weight="3"
             app:layout_constraintStart_toEndOf="@+id/item_unit"
             app:layout_constraintTop_toBottomOf="@+id/item_biz_date"  />
 

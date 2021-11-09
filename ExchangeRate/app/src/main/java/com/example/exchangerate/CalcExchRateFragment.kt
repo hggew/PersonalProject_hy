@@ -13,6 +13,7 @@ import android.widget.SpinnerAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.exchangerate.databinding.FragmentCalcExchRateBinding
+import kotlin.math.round
 
 class CalcExchRateFragment : Fragment() {
 
@@ -21,9 +22,17 @@ class CalcExchRateFragment : Fragment() {
 
     private val viewModel: ExchRateViewModel by viewModels()
 
-    var inputSelectUnit : String = ""
-    var outputSelectUnit : String = ""
-    var inputValue : Double = 0.0
+    var selectInput = selectExchRate("input","")
+    var selectOutnput = selectExchRate("output","")
+
+
+//    var inputSelectUnit: String = ""
+//    var outputSelectUnit: String = ""
+//    var inputSelectValue: Double = 0.0
+//    var outputSelectValue: Double = 0.0
+    var result : Double = 0.0
+
+    var inputValue: Double = 0.0
 
 
     override fun onCreateView(
@@ -31,7 +40,7 @@ class CalcExchRateFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        _binding = FragmentCalcExchRateBinding.inflate(inflater,container,false)
+        _binding = FragmentCalcExchRateBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 //        binding.recyclerView.adapter= CalcExchRateAdapter()
@@ -56,14 +65,15 @@ class CalcExchRateFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
+
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
                 id: Long,
             ) {
-                inputSelectUnit = parent?.getItemAtPosition(position).toString()
-                Log.d("<khy> spinner in", inputSelectUnit )
+                selectInput.unit = parent?.getItemAtPosition(position).toString()
+                Log.d("<khy> spinner in", selectInput.unit)
             }
         }
 
@@ -81,58 +91,68 @@ class CalcExchRateFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
+
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
                 id: Long,
             ) {
-                outputSelectUnit = parent?.getItemAtPosition(position).toString()
-                Log.d("<khy> spinner out", outputSelectUnit)
-//                Log.d("<khy> spinner out", position.toString())
-
+                selectOutnput.unit = parent?.getItemAtPosition(position).toString()
+                Log.d("<khy> spinner out", selectOutnput.unit)
             }
         }
 
         ///// btn /////
-        binding.btnCalc.setOnClickListener{
+        binding.btnCalc.setOnClickListener {
             calcExchRate()
         }
-
 
 
         return binding.root
     } //OnCreateView
 
-    fun calcExchRate(){
-        Log.d("<khy> calcbtn","${inputSelectUnit} / ${outputSelectUnit}")
+    fun calcExchRate() {
+        Log.d("<khy> calcbtn", "${selectInput.unit} / ${selectOutnput.unit}")
 
-        if (isValueValid()){
+        if (isValueValid()) {
             inputValue = binding.itemInputValue.text.toString().toDouble()
             Log.d("<khy> calcbtn", inputValue.toString())
 
+            findUnitIndex(selectInput)
+            findUnitIndex(selectOutnput)
+            Log.d("<khy> for3 in : ", selectInput.value.toString())
+            Log.d("<khy> for3 out : ", selectOutnput.value.toString())
 
-//            if(inputSelectUnit.equals("한화")){ }
+            result = selectInput.value * inputValue / selectOutnput.value
+            Log.d("<khy> result : ", result.toString())
 
-        }
-        else{
+            binding.itemOutputValue.text = (round(result*100)/100).toString()
+
+
+        } else {
             Log.d("<khy> calcbtn", "input number")
         }
     }
 
-    fun isValueValid():Boolean{
+    fun isValueValid(): Boolean {
         return viewModel.isValueValid(
             binding.itemInputValue.text.toString()
         )
     }
 
-//    fun findUnitIndex(){
-//                Log.d("<khy> list", "${_exchRate.value!!.size}")
-//        for(i in viewModel.exchRate.value!!){
-//
-//        }
-//
-//    }
+    fun findUnitIndex(selected : selectExchRate) {
+        var findValue : Double = 1.0  //한화일때 기본값=1
+
+        for ( exchRateList in viewModel.exchRate.value!!) {
+            if (exchRateList.unit.contains(selected.unit)){
+                findValue = exchRateList.value.toDouble()
+//                selected.value = exchRateList.value.toDouble()
+                break
+            }
+        }
+        selected.value = findValue
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -144,6 +164,11 @@ class CalcExchRateFragment : Fragment() {
     }
 
 
-
+    data class selectExchRate(
+        var type : String,
+        var unit: String,
+        var value : Double = 1.0
+    )
 
 }
+

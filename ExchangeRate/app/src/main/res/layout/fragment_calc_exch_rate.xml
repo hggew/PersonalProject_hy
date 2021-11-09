@@ -20,22 +20,23 @@
         android:layout_height="match_parent"
         android:layout_margin="16dp">
 
-    <TextView
+        <TextView
             android:id="@+id/item_biz_date"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/business_date"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
-            android:id="@+id/biz_date_calc"
+            android:id="@+id/biz_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
             android:text="@{viewModel.dateUrl}"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
             app:layout_constraintStart_toEndOf="@id/item_biz_date"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="20211029" />
@@ -69,12 +70,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-
         <Spinner
             android:id="@+id/item_output_unit"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:background="#1A9C27B0"
             android:spinnerMode="dialog"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,11 +85,15 @@
             android:id="@+id/item_output_value"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/border"
             android:gravity="center_vertical"
+            android:paddingStart="5dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_output_unit"
-            tools:text="1000"/>
+            tools:text="1000" />
 
 
         <Button
@@ -99,6 +103,7 @@
             android:layout_marginTop="50dp"
             android:background="@color/purple_200"
             android:text="@string/calculate"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_output_value" />
 
