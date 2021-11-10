@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SpinnerAdapter
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.exchangerate.databinding.FragmentCalcExchRateBinding
@@ -22,17 +23,16 @@ class CalcExchRateFragment : Fragment() {
 
     private val viewModel: ExchRateViewModel by viewModels()
 
-    var selectInput = selectExchRate("input","")
-    var selectOutnput = selectExchRate("output","")
-
-
-//    var inputSelectUnit: String = ""
-//    var outputSelectUnit: String = ""
-//    var inputSelectValue: Double = 0.0
-//    var outputSelectValue: Double = 0.0
-    var result : Double = 0.0
+    var selectInput = selectExchRate()
+    var selectOutnput = selectExchRate()
 
     var inputValue: Double = 0.0
+    var result : Double = 0.0
+
+    data class selectExchRate(
+        var unit: String = "",
+        var value : Double = 1.0
+    )
 
 
     override fun onCreateView(
@@ -43,14 +43,10 @@ class CalcExchRateFragment : Fragment() {
         _binding = FragmentCalcExchRateBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-//        binding.recyclerView.adapter= CalcExchRateAdapter()
+        binding.layout.setOnClickListener { closeKeyboard() }
 
         var unitData = resources.getStringArray(R.array.unit)
 
-
-//        spinner.adapter = ArrayAdapter(requireContext(),
-//            R.layout.support_simple_spinner_dropdown_item,
-//            unitData) as SpinnerAdapter
 
         ///// Input Spinner /////
         val inputSpinner = binding.itemInputUnit
@@ -103,21 +99,23 @@ class CalcExchRateFragment : Fragment() {
             }
         }
 
+
         ///// btn /////
         binding.btnCalc.setOnClickListener {
             calcExchRate()
+            closeKeyboard()
         }
 
-
         return binding.root
+
     } //OnCreateView
 
     fun calcExchRate() {
-        Log.d("<khy> calcbtn", "${selectInput.unit} / ${selectOutnput.unit}")
+//        Log.d("<khy> calcbtn", "${selectInput.unit} / ${selectOutnput.unit}")
 
         if (isValueValid()) {
             inputValue = binding.itemInputValue.text.toString().toDouble()
-            Log.d("<khy> calcbtn", inputValue.toString())
+//            Log.d("<khy> calcbtn", inputValue.toString())
 
             findUnitIndex(selectInput)
             findUnitIndex(selectOutnput)
@@ -128,7 +126,6 @@ class CalcExchRateFragment : Fragment() {
             Log.d("<khy> result : ", result.toString())
 
             binding.itemOutputValue.text = (round(result*100)/100).toString()
-
 
         } else {
             Log.d("<khy> calcbtn", "input number")
@@ -147,28 +144,23 @@ class CalcExchRateFragment : Fragment() {
         for ( exchRateList in viewModel.exchRate.value!!) {
             if (exchRateList.unit.contains(selected.unit)){
                 findValue = exchRateList.value.toDouble()
-//                selected.value = exchRateList.value.toDouble()
                 break
             }
         }
         selected.value = findValue
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        // Hide keyboard.
-        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as
-                InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
-        _binding = null
+    fun closeKeyboard(){
+        var view = requireActivity().currentFocus
+
+        if (view != null){
+            val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
 
 
-    data class selectExchRate(
-        var type : String,
-        var unit: String,
-        var value : Double = 1.0
-    )
+
 
 }
 
