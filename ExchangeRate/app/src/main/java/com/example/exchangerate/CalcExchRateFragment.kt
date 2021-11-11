@@ -10,9 +10,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SpinnerAdapter
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.example.exchangerate.databinding.FragmentCalcExchRateBinding
 import kotlin.math.round
 
@@ -21,7 +20,7 @@ class CalcExchRateFragment : Fragment() {
     private var _binding: FragmentCalcExchRateBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ExchRateViewModel by viewModels()
+    private val viewModel: ExchRateViewModel by activityViewModels()
 
     var selectInput = selectExchRate()
     var selectOutnput = selectExchRate()

@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.example.exchangerate.databinding.FragmentExchRateListBinding
 
 class ExchRateListFragment: Fragment() {
 
-    private val viewModel: ExchRateViewModel by viewModels()
+    private val viewModel: ExchRateViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,4 +24,5 @@ class ExchRateListFragment: Fragment() {
         binding.recyclerView.adapter= ExchRateListAdapter()
         return binding.root
     }
+
 }

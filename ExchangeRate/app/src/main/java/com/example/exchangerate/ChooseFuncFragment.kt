@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.example.exchangerate.databinding.FragmentChooseFuncBinding
 
@@ -30,10 +31,13 @@ class ChooseFuncFragment : Fragment() {
     }
 
     fun goCalcFragment(){
-        findNavController().navigate(R.id.action_chooseFuncFragment_to_calcExchRateFragment)
+        val action = ChooseFuncFragmentDirections.actionChooseFuncFragmentToCalendarFragment(1)
+        findNavController().navigate(action)
+    }
 
-    }
     fun goExchRateFragment(){
-        findNavController().navigate(R.id.action_chooseFuncFragment_to_exchRateListFragment )
+        val action = ChooseFuncFragmentDirections.actionChooseFuncFragmentToCalendarFragment(2)
+        findNavController().navigate(action)
     }
+
 }

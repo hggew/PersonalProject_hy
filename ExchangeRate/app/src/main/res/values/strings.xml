@@ -10,6 +10,9 @@
     <string name="exchange_rate">Exchange Rate</string>
     <string name="calculate">calculate</string>
     <string name="input_hint">금액을 입력하세요</string>
+    <string name="calendar">Calendar</string>
+    <string name="choose_date">날짜 선택</string>
+
 
 
 </resources>

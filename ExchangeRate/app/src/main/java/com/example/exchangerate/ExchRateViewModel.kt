@@ -9,67 +9,59 @@ import androidx.lifecycle.viewModelScope
 import com.example.exchangerate.network.*
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.LocalDate.now
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 
-class ExchRateViewModel: ViewModel() {
+class ExchRateViewModel : ViewModel() {
 
     private var _exchRate = MutableLiveData<List<ExchRate>>()
-    var exchRate : LiveData<List<ExchRate>> = _exchRate
+    var exchRate: LiveData<List<ExchRate>> = _exchRate
 
-    private var DATE : String = ""
-    lateinit var dateUrl : String
+    var dateUrl: String? = null
+    var dateUrlFromatted = ""
 
-    init{
-        Log.d("<khy-viewmodel>", "start view model")
-        getExchRate()
-    }
 
-    private fun getExchRate(){
-        Log.d("<khy-viewmodel>", "get exchange rate")
 
+    fun getExchRate(date: String?) {
         viewModelScope.launch {
-            try{
+            try {
                 Log.d("<khy-viewmodel>", "success launch")
-//                _exchRate = ExchRateApi.retrofitService.getExchRate()
 
-                dateUrl = getDate()
-                Log.d("<khy-viewmodel> dateurl", dateUrl)
-                var response= ExchRateApi.retrofitService.getExchRate(dateUrl)
+//                if (date == null ){
+//                    Log.d("<khy-viewmodel>", "dateUrl NULL !!!!!!!!!!!!!!")
+//                    dateUrl = getDate()
+//                    Log.d("<khy-viewmodel> dateurl", dateUrl!!)
+//                    var response= ExchRateApi.retrofitService.getExchRate(dateUrl!!)
+//
+//                    _exchRate.value = response.statisticSearch.row
+//
+//                    return@launch
+//                }
 
+                Log.d("<khy> dateurl/date ", "${dateUrl} + ${date}" )
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    dateUrlFromatted =
+                        LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyyMMdd")).toString()
+                }
+
+                var response = ExchRateApi.retrofitService.getExchRate(date!!)
                 _exchRate.value = response.statisticSearch.row
 
-                Log.d("<khy-exchrate>", "b: ${_exchRate.value!![0].value}")
 
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 Log.d("<khy-viemodel>", "error: $e")
-
-//                _exchRate.value = listOf()
             }
         }
     }
 
 
 
-
-    private fun getDate(): String {
-//        val recentBizDate: LocalDate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            now()
-//        } else {
-//            TODO("VERSION.SDK_INT < O")
-//        }
-
-//        DATE = recentBizDate.toString()
-        DATE = "20211029"
-
-        Log.d("<khy>getDATE", DATE+"/"+DATE )
-
-        return DATE
-    }
-
-    fun isValueValid(itemValue: String): Boolean{
-        if(itemValue.isBlank()) return false
+    fun isValueValid(itemValue: String): Boolean {
+        if (itemValue.isBlank()) return false
         return true
     }
 
