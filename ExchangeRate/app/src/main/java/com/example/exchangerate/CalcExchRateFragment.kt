@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SpinnerAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.exchangerate.databinding.FragmentCalcExchRateBinding
@@ -34,6 +35,7 @@ class CalcExchRateFragment : Fragment() {
     )
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,7 +46,7 @@ class CalcExchRateFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.layout.setOnClickListener { closeKeyboard() }
 
-        var unitData = resources.getStringArray(R.array.unit)
+        var unitData = resources.getStringArray(R.array.unit)       //스피너 리스트
 
 
         ///// Input Spinner /////
@@ -109,6 +111,8 @@ class CalcExchRateFragment : Fragment() {
 
     } //OnCreateView
 
+
+
     fun calcExchRate() {
 //        Log.d("<khy> calcbtn", "${selectInput.unit} / ${selectOutnput.unit}")
 
@@ -118,8 +122,7 @@ class CalcExchRateFragment : Fragment() {
 
             findUnitIndex(selectInput)
             findUnitIndex(selectOutnput)
-            Log.d("<khy> for3 in : ", selectInput.value.toString())
-            Log.d("<khy> for3 out : ", selectOutnput.value.toString())
+            Log.d("<khy> in/out value : ", "${selectInput.value.toString()} / ${selectOutnput.value.toString()}" )
 
             result = selectInput.value * inputValue / selectOutnput.value
             Log.d("<khy> result : ", result.toString())

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -37,12 +38,14 @@ class CalendarFragment : Fragment() {
         val calendarView: CalendarView = binding.calendarView
 
         val today = Calendar.getInstance()
-        calendarView.maxDate=today.timeInMillis
+        calendarView.maxDate = today.timeInMillis
 
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
 
             binding.btnChooseDate.isEnabled = true
-            selectDate = year.toString()+(month+1).toString()+dayOfMonth.toString().padStart(2,'0')
+            selectDate =
+                year.toString() + (month + 1).toString().padStart(2, '0') + dayOfMonth.toString()
+                    .padStart(2, '0')
 
             Log.d("<khy> - 달력", "${year} / ${month} / ${dayOfMonth}")
             Log.d("<khy> selectdate", selectDate)
@@ -59,18 +62,19 @@ class CalendarFragment : Fragment() {
     }//onCreateView
 
 
-
-
     fun chooseDate() {
-        viewModel.dateUrl=selectDate
+        viewModel.dateUrl = selectDate
+        val navArgument: CalendarFragmentArgs by navArgs()
+
         viewModel.getExchRate(viewModel.dateUrl)
 
-        val navArgument: CalendarFragmentArgs by navArgs()
 
         when (navArgument.chooseFuncNum) {
             1 -> findNavController().navigate(R.id.action_calendarFragment_to_calcExchRateFragment)
             2 -> findNavController().navigate(R.id.action_calendarFragment_to_exchRateListFragment)
         }
+
+
     }
 
 }

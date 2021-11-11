@@ -4,13 +4,9 @@ import com.squareup.moshi.Json
 
 data class StatisticSearch(
     @Json(name = "StatisticSearch")
-    val statisticSearch: Row
+    val statisticSearch: Row?
 )
 
-//data class ListTotalCount(
-//    @Json(name = "list_total_count")
-//    val listTotalCount: Row
-//)
 
 data class Row(
     @Json(name = "row")
@@ -32,3 +28,6 @@ data class ExchRate (
     val date: String
 
 )
+
+
+

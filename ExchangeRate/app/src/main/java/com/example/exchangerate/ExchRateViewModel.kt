@@ -9,10 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.exchangerate.network.*
 import kotlinx.coroutines.launch
 import java.lang.Exception
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 
 class ExchRateViewModel : ViewModel() {
@@ -23,25 +21,15 @@ class ExchRateViewModel : ViewModel() {
     var dateUrl: String? = null
     var dateUrlFromatted = ""
 
+    var boo: Boolean = false
 
 
-    fun getExchRate(date: String?) {
+
+    fun getExchRate(date: String?){
+
         viewModelScope.launch {
             try {
-                Log.d("<khy-viewmodel>", "success launch")
-
-//                if (date == null ){
-//                    Log.d("<khy-viewmodel>", "dateUrl NULL !!!!!!!!!!!!!!")
-//                    dateUrl = getDate()
-//                    Log.d("<khy-viewmodel> dateurl", dateUrl!!)
-//                    var response= ExchRateApi.retrofitService.getExchRate(dateUrl!!)
-//
-//                    _exchRate.value = response.statisticSearch.row
-//
-//                    return@launch
-//                }
-
-                Log.d("<khy> dateurl/date ", "${dateUrl} + ${date}" )
+                Log.d("<khy> dateurl/date ", "${dateUrl} + ${date}")
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     dateUrlFromatted =
@@ -49,15 +37,14 @@ class ExchRateViewModel : ViewModel() {
                 }
 
                 var response = ExchRateApi.retrofitService.getExchRate(date!!)
-                _exchRate.value = response.statisticSearch.row
-
+                _exchRate.value = response.statisticSearch?.row
 
             } catch (e: Exception) {
                 Log.d("<khy-viemodel>", "error: $e")
             }
         }
-    }
 
+    }
 
 
     fun isValueValid(itemValue: String): Boolean {
