@@ -10,7 +10,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SpinnerAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.exchangerate.databinding.FragmentCalcExchRateBinding
@@ -42,6 +41,12 @@ class CalcExchRateFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentCalcExchRateBinding.inflate(inflater, container, false)
+        return binding.root
+    } //OnCreateView
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         binding.layout.setOnClickListener { closeKeyboard() }
@@ -107,21 +112,18 @@ class CalcExchRateFragment : Fragment() {
             closeKeyboard()
         }
 
-        return binding.root
+    }//onViewCreated
 
-    } //OnCreateView
 
 
 
     fun calcExchRate() {
-//        Log.d("<khy> calcbtn", "${selectInput.unit} / ${selectOutnput.unit}")
 
         if (isValueValid()) {
             inputValue = binding.itemInputValue.text.toString().toDouble()
-//            Log.d("<khy> calcbtn", inputValue.toString())
 
-            findUnitIndex(selectInput)
-            findUnitIndex(selectOutnput)
+            findUnitValue(selectInput)
+            findUnitValue(selectOutnput)
             Log.d("<khy> in/out value : ", "${selectInput.value.toString()} / ${selectOutnput.value.toString()}" )
 
             result = selectInput.value * inputValue / selectOutnput.value
@@ -140,7 +142,8 @@ class CalcExchRateFragment : Fragment() {
         )
     }
 
-    fun findUnitIndex(selected : selectExchRate) {
+
+    fun findUnitValue(selected : CalcExchRateFragment.selectExchRate) {
         var findValue : Double = 1.0  //한화일때 기본값=1
 
         for ( exchRateList in viewModel.exchRate.value!!) {
@@ -150,7 +153,8 @@ class CalcExchRateFragment : Fragment() {
             }
         }
         selected.value = findValue
-    }
+    }//findUnitValue
+
 
     fun closeKeyboard(){
         var view = requireActivity().currentFocus

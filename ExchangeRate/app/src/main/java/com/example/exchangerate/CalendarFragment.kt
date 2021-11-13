@@ -31,8 +31,15 @@ class CalendarFragment : Fragment() {
     ): View? {
 
         _binding = FragmentCalendarBinding.inflate(inflater, container, false)
-        binding.viewModel = viewModel
+        return binding.root
 
+    }//onCreateView
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.viewModel = viewModel
 
         ///// calendar /////
         val calendarView: CalendarView = binding.calendarView
@@ -41,7 +48,6 @@ class CalendarFragment : Fragment() {
         calendarView.maxDate = today.timeInMillis
 
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-
             binding.btnChooseDate.isEnabled = true
             selectDate =
                 year.toString() + (month + 1).toString().padStart(2, '0') + dayOfMonth.toString()
@@ -56,10 +62,7 @@ class CalendarFragment : Fragment() {
         binding.btnChooseDate.setOnClickListener {
             chooseDate()
         }
-
-        return binding.root
-
-    }//onCreateView
+    }//onViewCreated
 
 
     fun chooseDate() {
@@ -67,14 +70,17 @@ class CalendarFragment : Fragment() {
         val navArgument: CalendarFragmentArgs by navArgs()
 
         viewModel.getExchRate(viewModel.dateUrl)
-
-
-        when (navArgument.chooseFuncNum) {
-            1 -> findNavController().navigate(R.id.action_calendarFragment_to_calcExchRateFragment)
-            2 -> findNavController().navigate(R.id.action_calendarFragment_to_exchRateListFragment)
+        if (viewModel.boo) {
+            when (navArgument.chooseFuncNum) {
+                1 -> findNavController().navigate(R.id.action_calendarFragment_to_calcExchRateFragment)
+                2 -> findNavController().navigate(R.id.action_calendarFragment_to_exchRateListFragment)
+            }
+        } else {
+            Toast.makeText(requireContext(), "It's not a business day.\n" +
+                    "Please choose the date again.", Toast.LENGTH_LONG).show()
+            binding.btnChooseDate.isEnabled = false
         }
 
-
-    }
+    }//chooseDate
 
 }

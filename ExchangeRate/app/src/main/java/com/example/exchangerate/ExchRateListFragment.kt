@@ -1,7 +1,6 @@
 package com.example.exchangerate
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,27 +12,23 @@ class ExchRateListFragment : Fragment() {
 
     private val viewModel: ExchRateViewModel by activityViewModels()
 
+    private var _binding: FragmentExchRateListBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        val binding = FragmentExchRateListBinding.inflate(inflater)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.recyclerView.adapter = ExchRateListAdapter()
-
-        if (viewModel.exchRate == null) {
-            Log.d("<khy null>", "null")
-//            Toast.makeText(requireContext(), "choose date again!", Toast.LENGTH_SHORT).show()
-        } else {
-            Log.d("<khy null>", "goooooooooooooooood")
-        }
-
-
-
+        _binding = FragmentExchRateListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.recyclerView.adapter = ExchRateListAdapter()
+    }
 }

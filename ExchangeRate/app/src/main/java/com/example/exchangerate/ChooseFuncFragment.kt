@@ -10,28 +10,31 @@ import com.example.exchangerate.databinding.FragmentChooseFuncBinding
 
 class ChooseFuncFragment : Fragment() {
 
-
-    private var binding : FragmentChooseFuncBinding? = null
+    private var _binding: FragmentChooseFuncBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val fragmentBinding = FragmentChooseFuncBinding.inflate(inflater, container, false)
-        binding = fragmentBinding
-        return fragmentBinding.root
+        _binding = FragmentChooseFuncBinding.inflate(inflater, container, false)
+        return binding.root
     }//onCreateView
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.chooseFuncFragment = this
     }
 
+
     fun goCalcFragment(){
         val action = ChooseFuncFragmentDirections.actionChooseFuncFragmentToCalendarFragment(1)
         findNavController().navigate(action)
     }
+
 
     fun goExchRateFragment(){
         val action = ChooseFuncFragmentDirections.actionChooseFuncFragmentToCalendarFragment(2)

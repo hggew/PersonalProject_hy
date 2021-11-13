@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.exchangerate.network.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.lang.Exception
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -24,20 +25,28 @@ class ExchRateViewModel : ViewModel() {
     var boo: Boolean = false
 
 
-
-    fun getExchRate(date: String?){
+    fun getExchRate(date: String?) {
 
         viewModelScope.launch {
             try {
-                Log.d("<khy> dateurl/date ", "${dateUrl} + ${date}")
+                runBlocking {
+                    Log.d("<khy> dateurl/date ", "${dateUrl} + ${date}")
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    dateUrlFromatted =
-                        LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyyMMdd")).toString()
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        dateUrlFromatted =
+                            LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyyMMdd"))
+                                .toString()
+                    }
+
+                    var response = ExchRateApi.retrofitService.getExchRate(date!!)
+
+                    when(response.statisticSearch){
+                        null -> boo = false
+                        else -> boo = true
+                    }
+
+                    _exchRate.value = response.statisticSearch?.row
                 }
-
-                var response = ExchRateApi.retrofitService.getExchRate(date!!)
-                _exchRate.value = response.statisticSearch?.row
 
             } catch (e: Exception) {
                 Log.d("<khy-viemodel>", "error: $e")
