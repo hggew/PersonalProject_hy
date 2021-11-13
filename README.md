@@ -9,9 +9,9 @@
 6. 'CALCULATE'버튼 클릭
  
 
-| <img src ="IMAGE/시작화면.jpg" style="width:40%; margin-top: 20px;"> | <img src = "IMAGE/캘린더시작.jpg"  style="width:40%; margin-top: 20px;">| <img src = "IMAGE/캘린더날짜선택.jpg"  style="width:40%; margin-top: 20px;">|
+| <img src ="IMAGE/시작화면.jpg" style="margin-top: 20px;"> | <img src = "IMAGE/캘린더시작.jpg"  style="margin-top: 20px;">| <img src = "IMAGE/캘린더날짜선택.jpg"  style="margin-top: 20px;">|
 |:-:|:-:|:-:|
-| <img src = "IMAGE/스피너.jpg" style="width:40%; margin-top: 20px;"> | <img src = "IMAGE/입력모습.jpg" style="width:40%; margin-top: 20px;"> | <img src = "IMAGE/계산.jpg" style="width:40%; margin-top: 20px;"> |
+| <img src = "IMAGE/스피너.jpg" style="margin-top: 20px;"> | <img src = "IMAGE/입력모습.jpg" style="margin-top: 20px;"> | <img src = "IMAGE/계산.jpg" style="margin-top: 20px;"> |
 
 
 <br><br>
@@ -32,6 +32,6 @@
 2. 날짜 선택
  
 
-| <img src ="IMAGE/시작화면.jpg" style="width:40%; margin-top: 20px;"> | <img src = "IMAGE/캘린더시작.jpg"  style="width:40%; margin-top: 20px;">| <img src = "IMAGE/캘린더날짜선택.jpg"  style="width:40%; margin-top: 20px;">|
+| <img src ="IMAGE/시작화면.jpg" style=" margin-top: 20px;"> | <img src = "IMAGE/캘린더시작.jpg"  style=" margin-top: 20px;">| <img src = "IMAGE/캘린더날짜선택.jpg"  style=" margin-top: 20px;">|
 |:-:|:-:|:-:|
-| <img src = "IMAGE/목록1.jpg" style="width:40%; margin-top: 20px;"> | <img src = "IMAGE/목록2.jpg" style="width:40%; margin-top: 20px;"> | |
+| <img src = "IMAGE/목록1.jpg" style=" margin-top: 20px;"> | <img src = "IMAGE/목록2.jpg" style=" margin-top: 20px;"> | |
