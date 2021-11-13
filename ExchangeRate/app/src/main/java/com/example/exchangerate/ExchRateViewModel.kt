@@ -20,7 +20,7 @@ class ExchRateViewModel : ViewModel() {
     var exchRate: LiveData<List<ExchRate>> = _exchRate
 
     var dateUrl: String? = null
-    var dateUrlFromatted = ""
+    var dateUrlFormatted = ""
 
     var boo: Boolean = false
 
@@ -33,14 +33,14 @@ class ExchRateViewModel : ViewModel() {
                     Log.d("<khy> dateurl/date ", "${dateUrl} + ${date}")
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        dateUrlFromatted =
+                        dateUrlFormatted =
                             LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyyMMdd"))
                                 .toString()
                     }
 
                     var response = ExchRateApi.retrofitService.getExchRate(date!!)
 
-                    when(response.statisticSearch){
+                    when (response.statisticSearch) {
                         null -> boo = false
                         else -> boo = true
                     }

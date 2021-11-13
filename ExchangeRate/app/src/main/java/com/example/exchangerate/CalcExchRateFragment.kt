@@ -10,9 +10,11 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SpinnerAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.exchangerate.databinding.FragmentCalcExchRateBinding
+import java.text.DecimalFormat
 import kotlin.math.round
 
 class CalcExchRateFragment : Fragment() {
@@ -26,7 +28,6 @@ class CalcExchRateFragment : Fragment() {
     var selectOutnput = selectExchRate()
 
     var inputValue: Double = 0.0
-    var result : Double = 0.0
 
     data class selectExchRate(
         var unit: String = "",
@@ -126,12 +127,17 @@ class CalcExchRateFragment : Fragment() {
             findUnitValue(selectOutnput)
             Log.d("<khy> in/out value : ", "${selectInput.value.toString()} / ${selectOutnput.value.toString()}" )
 
-            result = selectInput.value * inputValue / selectOutnput.value
-            Log.d("<khy> result : ", result.toString())
+            var result : Double = selectInput.value * inputValue / selectOutnput.value
+            var roundResult : Double = round(result*100/100)
+            Log.d("<khy> result : ", roundResult.toString())
 
-            binding.itemOutputValue.text = (round(result*100)/100).toString()
+            var formatter = DecimalFormat("#,###")
+
+            binding.itemOutputValue.text = formatter.format(roundResult).toString()
 
         } else {
+            binding.itemOutputValue.text=""
+            Toast.makeText(requireContext(), "Please enter the value.", Toast.LENGTH_SHORT).show()
             Log.d("<khy> calcbtn", "input number")
         }
     }
